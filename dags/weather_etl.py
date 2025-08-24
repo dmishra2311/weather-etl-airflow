@@ -15,6 +15,8 @@ with open(CONFIG_FILE, "r") as f:
     cfg = json.load(f)
 
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
+if not API_KEY:
+    raise ValueError("OPENWEATHER_API_KEY not set in environment variables")
 CITIES = cfg["cities"]
 
 # ========== HELPERS ==========
