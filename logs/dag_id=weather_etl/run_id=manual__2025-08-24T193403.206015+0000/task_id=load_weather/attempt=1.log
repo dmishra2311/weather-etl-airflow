@@ -1,0 +1,30 @@
+[2025-08-24T19:34:07.384+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl.load_weather manual__2025-08-24T19:34:03.206015+00:00 [queued]>
+[2025-08-24T19:34:07.393+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl.load_weather manual__2025-08-24T19:34:03.206015+00:00 [queued]>
+[2025-08-24T19:34:07.394+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-24T19:34:07.408+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_weather> on 2025-08-24 19:34:03.206015+00:00
+[2025-08-24T19:34:07.413+0000] {standard_task_runner.py:60} INFO - Started process 218 to run task
+[2025-08-24T19:34:07.416+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'weather_etl', 'load_weather', 'manual__2025-08-24T19:34:03.206015+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl.py', '--cfg-path', '/tmp/tmp5yjzrjpf']
+[2025-08-24T19:34:07.418+0000] {standard_task_runner.py:88} INFO - Job 19: Subtask load_weather
+[2025-08-24T19:34:07.496+0000] {task_command.py:423} INFO - Running <TaskInstance: weather_etl.load_weather manual__2025-08-24T19:34:03.206015+00:00 [running]> on host 7b1c3b0dd09a
+[2025-08-24T19:34:07.684+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_etl' AIRFLOW_CTX_TASK_ID='load_weather' AIRFLOW_CTX_EXECUTION_DATE='2025-08-24T19:34:03.206015+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-24T19:34:03.206015+00:00'
+[2025-08-24T19:34:07.701+0000] {base.py:83} INFO - Using connection ID 'postgres_default' for task execution.
+[2025-08-24T19:34:07.705+0000] {sql.py:450} INFO - Running statement: 
+    CREATE TABLE IF NOT EXISTS weather_data (
+        id SERIAL PRIMARY KEY,
+        city VARCHAR(50),
+        date DATE,
+        temperature FLOAT,
+        humidity INT,
+        condition VARCHAR(50)
+    );
+    , parameters: None
+[2025-08-24T19:34:07.713+0000] {base.py:83} INFO - Using connection ID 'postgres_default' for task execution.
+[2025-08-24T19:34:07.717+0000] {sql.py:450} INFO - Running statement: 
+    INSERT INTO weather_data (city, date, temperature, humidity, condition)
+    VALUES (%s, %s, %s, %s, %s)
+    , parameters: ('Saint Petersburg', '2025-08-24', 12.08, 87, 'Clouds')
+[2025-08-24T19:34:07.719+0000] {sql.py:459} INFO - Rows affected: 1
+[2025-08-24T19:34:07.722+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-08-24T19:34:07.730+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=weather_etl, task_id=load_weather, execution_date=20250824T193403, start_date=20250824T193407, end_date=20250824T193407
+[2025-08-24T19:34:07.750+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-24T19:34:07.764+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
